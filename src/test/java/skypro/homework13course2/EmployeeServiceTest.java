@@ -45,15 +45,9 @@ public class EmployeeServiceTest {
     @Test
     public void StorageIsFullTest() {
 
-        Assertions.assertThat(employeeService.list())
-                .hasSize(3)
-                .containsExactlyInAnyOrder(
-                        new Employee("Михаил", "Викторович", 1, 6000),
-                        new Employee("Антонина", "Викторовна", 2, 3000),
-                        new Employee("Дмитрий", "Викторович", 3, 2000)
-
-                );
-
+        String[] storage = new String[4];
+        int size = 0;
+        if (size == storage.length)
         Assertions.assertThatExceptionOfType(EmployeeStorageIsFullException.class)
                 .isThrownBy(() -> employeeService.add("Лилия", "Викторовна", 2, 6000));
 

@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class EmployeeService {
-    private static final int SIZE = 4;
+    private static final int SIZE = 10;
     private final List<Employee> employees = new ArrayList<>(SIZE);
 
 

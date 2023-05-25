@@ -14,7 +14,7 @@ public class DepartmentService {
     public DepartmentService(EmployeeService employeeService) {
         DepartmentService.employeeService = employeeService;
     }
-        public static final Employee[] employees = new Employee[4];
+        public static final Employee[] employees = new Employee[10];
 
         public Employee getMaxWage(int department) {
             return employeeService.list().stream()
