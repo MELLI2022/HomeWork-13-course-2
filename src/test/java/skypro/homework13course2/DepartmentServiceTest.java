@@ -31,7 +31,7 @@ public class DepartmentServiceTest {
     @InjectMocks
     private DepartmentService departmentService;
 
-   private List<Employee> employees;
+    private List<Employee> employees;
 
     public static Stream<Arguments> getMaxWageTestParams() {
         return Stream.of(
@@ -40,6 +40,7 @@ public class DepartmentServiceTest {
                 Arguments.of(3, new Employee("Людмила", "Викторовна", 3, 1000))
         );
     }
+
     public static Stream<Arguments> getMinWageTestParams() {
         return Stream.of(
                 Arguments.of(1, new Employee("Михаил", "Викторович", 1, 6000)),
@@ -47,26 +48,27 @@ public class DepartmentServiceTest {
                 Arguments.of(3, new Employee("Людмила", "Викторовна", 3, 1000))
         );
     }
+
     public static Stream<Arguments> getAllInDepartTestParams() {
         return Stream.of(
                 Arguments.of(1,
                         List.of(
-                                 new Employee("Михаил", "Викторович", 1, 6000)
+                                new Employee("Михаил", "Викторович", 1, 6000)
                         )
                 ),
-                        Arguments.of(2,
+                Arguments.of(2,
                         List.of(
                                 new Employee("Антонина", "Викторовна", 2, 3000),
                                 new Employee("Дмитрий", "Викторович", 2, 2000)
                         )
-                        ),
+                ),
                 Arguments.of(3,
                         List.of(
-                                 new Employee("Людмила", "Викторовна", 3, 1000)
+                                new Employee("Людмила", "Викторовна", 3, 1000)
                         )
                 ),
                 Arguments.of(4,
-                Collections.emptyList()
+                        Collections.emptyList()
                 )
 
         );
@@ -80,50 +82,55 @@ public class DepartmentServiceTest {
                         "Викторович",
                         1,
                         6000),
-                        new Employee("Антонина",
-                                "Викторовна",
-                                2,
-                                3000),
-                                new Employee("Дмитрий",
-                                        "Викторович",
-                                        2,
-                                        2000),
-                                        new Employee("Людмила",
-                                                "Викторовна",
-                                                3,
-                                                1000)
-                );
+                new Employee("Антонина",
+                        "Викторовна",
+                        2,
+                        3000),
+                new Employee("Дмитрий",
+                        "Викторович",
+                        2,
+                        2000),
+                new Employee("Людмила",
+                        "Викторовна",
+                        3,
+                        1000)
+        );
         Mockito.when(employeeService.list()).thenReturn(employees);
     }
 
     @ParameterizedTest
-   @MethodSource("getMaxWageTestParams" )
-   public void getMaxWageTest(int departmentId, Employee expected) {
-      Assertions.assertThat(departmentService.getMaxWage(departmentId))
-               .isEqualTo(expected);
+    @MethodSource("getMaxWageTestParams")
+    public void getMaxWageTest(int departmentId, Employee expected) {
+        Assertions.assertThat(departmentService.getMaxWage(departmentId))
+                .isEqualTo(expected);
     }
+
     @Test
-    public void getMaxWageTest2(){
+    public void getMaxWageTest2() {
         Assertions.assertThatExceptionOfType(EmployeeNotFoundException.class)
                 .isThrownBy(() -> departmentService.getMaxWage(4));
     }
+
     @ParameterizedTest
-    @MethodSource("getMinWageTestParams" )
+    @MethodSource("getMinWageTestParams")
     public void getMinWageTest(int department, Employee expected) {
         Assertions.assertThat(departmentService.getMinWage(department))
                 .isEqualTo(expected);
     }
+
     @Test
-    public void getMinWageTest2(){
+    public void getMinWageTest2() {
         Assertions.assertThatExceptionOfType(EmployeeNotFoundException.class)
                 .isThrownBy(() -> departmentService.getMinWage(4));
     }
+
     @ParameterizedTest
-    @MethodSource("getAllInDepartTestParams" )
+    @MethodSource("getAllInDepartTestParams")
     public void getAllInDepartTest(int departmentId, List<Employee> expected) {
         Assertions.assertThat(departmentService.getAllInDepart(departmentId))
                 .containsExactlyInAnyOrderElementsOf(expected);
     }
+
     @Test
     public void getAllByDepartTestParams() {
         Map<Integer, List<Employee>> expected = Map.of(

@@ -9,15 +9,16 @@ import java.util.stream.Collectors;
 
 @Service
 public class DepartmentService {
-   private static  EmployeeService employeeService = new EmployeeService();
+    private static EmployeeService employeeService = new EmployeeService();
 
     public DepartmentService(EmployeeService employeeService) {
         DepartmentService.employeeService = employeeService;
     }
-        public static final Employee[] employees = new Employee[10];
 
-        public Employee getMaxWage(int department) {
-            return employeeService.list().stream()
+    public static final Employee[] employees = new Employee[10];
+
+    public Employee getMaxWage(int department) {
+        return employeeService.list().stream()
                 .filter(Objects::nonNull)
                 .filter(employee -> employee.getDepartment() == department)
                 .max(Comparator.comparingDouble(Employee::getWage))
@@ -28,18 +29,19 @@ public class DepartmentService {
     public static Employee getMinWage(Integer department) {
         return employeeService.list().stream()
                 .filter(Objects::nonNull)
-                .filter(employee -> employee.getDepartment() == department )
+                .filter(employee -> employee.getDepartment() == department)
                 .min(Comparator.comparingInt(Employee::getWage))
                 .orElseThrow(EmployeeNotFoundException::new);
     }
-    public List<Employee> getAllInDepart(int id){
+
+    public List<Employee> getAllInDepart(int id) {
         return employeeService.list().stream()
-                .filter(employee -> employee.getDepartment() == id )
+                .filter(employee -> employee.getDepartment() == id)
                 .collect(Collectors.toList());
 
     }
 
-    public Map<Integer, List<Employee>> getAllByDepart(){
+    public Map<Integer, List<Employee>> getAllByDepart() {
         return employeeService.list().stream()
                 .collect(Collectors.groupingBy(Employee::getDepartment));
 

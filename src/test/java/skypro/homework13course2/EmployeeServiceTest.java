@@ -42,16 +42,27 @@ public class EmployeeServiceTest {
                 .isThrownBy(() -> employeeService.add("Михаил", "Викторович", 1, 6000));
     }
 
+    //    @Test
+//    public void StorageIsFullTest() {
+//        String[] storage = new String[4];
+//        int size = 0;
+//        if (size == storage.length)
+//        Assertions.assertThatExceptionOfType(EmployeeStorageIsFullException.class)
+//                .isThrownBy(() -> employeeService.add("Лилия", "Викторовна", 2, 6000));
+//
+//    }
     @Test
     public void StorageIsFullTest() {
-
-        String[] storage = new String[4];
-        int size = 0;
-        if (size == storage.length)
         Assertions.assertThatExceptionOfType(EmployeeStorageIsFullException.class)
-                .isThrownBy(() -> employeeService.add("Лилия", "Викторовна", 2, 6000));
-
+                .isThrownBy(() -> {
+                            while (employeeService.list().size() <= 10) {
+                                employeeService.add("Лилия" + employeeService.list().size(),
+                                        "Викторовна", 2, 6000);
+                            }
+                        }
+                );
     }
+
 
     @Test
     public void findTest() {

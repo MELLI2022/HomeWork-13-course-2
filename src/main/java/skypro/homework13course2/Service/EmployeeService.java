@@ -15,11 +15,11 @@ public class EmployeeService {
     private final List<Employee> employees = new ArrayList<>(SIZE);
 
 
-    public Employee add(String firstName, String lastName,int department, int wage) {
+    public Employee add(String firstName, String lastName, int department, int wage) {
         Employee employee = new Employee(firstName, lastName, department, wage);
-        if(employees.contains(employee)){
-                    throw new EmployeeAlreadyAddedException();
-                }
+        if (employees.contains(employee)) {
+            throw new EmployeeAlreadyAddedException();
+        }
         if (employees.size() < SIZE) {
             employees.add(employee);
             return employee;
@@ -27,7 +27,7 @@ public class EmployeeService {
         throw new EmployeeStorageIsFullException();
     }
 
-    public Employee find (String firstName, String lastName, int department, int wage){
+    public Employee find(String firstName, String lastName, int department, int wage) {
         Employee employee = new Employee(firstName, lastName, department, wage);
         if (employees.contains(employee)) {
             return employee;
@@ -35,7 +35,8 @@ public class EmployeeService {
 
         throw new EmployeeNotFoundException();
     }
-    public Employee remove (String firstName, String lastName,int department, int wage){
+
+    public Employee remove(String firstName, String lastName, int department, int wage) {
         Employee employee = new Employee(firstName, lastName, department, wage);
         if (employees.remove(employee)) {
             return employee;
@@ -43,7 +44,8 @@ public class EmployeeService {
 
         throw new EmployeeNotFoundException();
     }
-    public List<Employee> list (){
+
+    public List<Employee> list() {
         return new ArrayList<>(employees);
     }
 
